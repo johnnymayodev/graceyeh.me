@@ -1,0 +1,10 @@
+services:
+  client:
+    env_file: .env
+    container_name: ${CLIENT_CONTAINER_NAME}
+    build: ./
+    ports:
+      - '${CLIENT_CONTAINER_PORT}:5173'
+    volumes:
+      - ./:/app
+      - /app/node_modules
