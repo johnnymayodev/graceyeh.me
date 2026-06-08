@@ -4,20 +4,34 @@
 @custom-variant dark (&:is(.dark *));
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-bento-page font-sans text-foreground antialiased;
+  }
+
+  [id] {
+    scroll-margin-top: var(--header-height);
   }
 }
 
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Cabinet Grotesk", "Inter", ui-sans-serif, sans-serif;
+  --radius-sm: calc(var(--radius) - 8px);
+  --radius-md: calc(var(--radius) - 4px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --color-bento-page: var(--bento-page);
+  --color-bento-tile: var(--bento-tile);
+  --color-bento-accent: var(--bento-accent);
+  --color-bento-tile-muted: var(--bento-tile-muted);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -52,70 +66,264 @@
 }
 
 :root {
-  --radius: 0.65rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.141 0.005 285.823);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.141 0.005 285.823);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.141 0.005 285.823);
-  --primary: hsl(333, 100%, 45%);
-  --primary-foreground: oklch(0.971 0.013 17.38);
-  --secondary: oklch(0.967 0.001 286.375);
-  --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.21 0.006 285.885);
+  --header-height: 3.5rem;
+  --bento-page: #ebf1f4;
+  --bento-tile: #ffffff;
+  --bento-accent: #c2fc69;
+  --bento-tile-muted: #e9e9ec;
+  --bento-gap: 16px;
+  --bento-row-height: 290px;
+  --bento-max-width: 1200px;
+  --radius: 2rem;
+  --background: #ebf1f4;
+  --foreground: #0a1014;
+  --card: #ffffff;
+  --card-foreground: #0a1014;
+  --popover: #ffffff;
+  --popover-foreground: #0a1014;
+  --primary: #0a1014;
+  --primary-foreground: #ffffff;
+  --secondary: #e9e9ec;
+  --secondary-foreground: #0a1014;
+  --muted: #f0f0f0;
+  --muted-foreground: #595f5d;
+  --accent: #c2fc69;
+  --accent-foreground: #0a1014;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.704 0.191 22.216);
-  --chart-1: hsl(333, 100%, 82%);
-  --chart-2: hsl(333, 96%, 58%);
-  --chart-3: hsl(333, 100%, 45%);
-  --chart-4: hsl(333, 100%, 38%);
-  --chart-5: hsl(333, 92%, 33%);
+  --border: #e9e9ec;
+  --input: #e9e9ec;
+  --ring: #595f5d;
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
   --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-primary: hsl(333, 100%, 45%);
-  --sidebar-primary-foreground: oklch(0.971 0.013 17.38);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: hsl(333, 100%, 70%);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.145 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.96 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.88 0 0);
+  --sidebar-ring: oklch(0.55 0 0);
 }
 
 .dark {
-  --background: oklch(0.141 0.005 285.823);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: hsl(333, 96%, 58%);
-  --primary-foreground: oklch(0.971 0.013 17.38);
-  --secondary: oklch(0.274 0.006 286.033);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground: oklch(0.985 0 0);
+  --bento-page: #0a1014;
+  --bento-tile: #141414;
+  --bento-tile-muted: #1c1c1c;
+  --background: #0a1014;
+  --foreground: #f0f0f0;
+  --card: #141414;
+  --card-foreground: #f0f0f0;
+  --popover: #141414;
+  --popover-foreground: #f0f0f0;
+  --primary: #f0f0f0;
+  --primary-foreground: #0a1014;
+  --secondary: #1c1c1c;
+  --secondary-foreground: #f0f0f0;
+  --muted: #1c1c1c;
+  --muted-foreground: #b6b6b6;
+  --accent: #c2fc69;
+  --accent-foreground: #0a1014;
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: hsl(333, 69%, 30%);
-  --chart-1: hsl(333, 100%, 82%);
-  --chart-2: hsl(333, 96%, 58%);
-  --chart-3: hsl(333, 100%, 45%);
-  --chart-4: hsl(333, 100%, 38%);
-  --chart-5: hsl(333, 92%, 33%);
-  --sidebar: oklch(0.21 0.006 285.885);
+  --border: #1c1c1c;
+  --input: #1c1c1c;
+  --ring: #b6b6b6;
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: hsl(333, 96%, 58%);
-  --sidebar-primary-foreground: oklch(0.971 0.013 17.38);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
+  --sidebar-primary: oklch(0.985 0 0);
+  --sidebar-primary-foreground: oklch(0.145 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: hsl(333, 69%, 30%);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: oklch(0.55 0 0);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee var(--marquee-duration, 30s) linear infinite;
+}
+
+@layer components {
+  .bento-container {
+    container-type: inline-size;
+    container-name: bento;
+  }
+
+  .bento-grid {
+    --bento-cols: 2;
+    gap: var(--bento-gap);
+    grid-auto-rows: calc(
+      (100cqw - (var(--bento-cols) - 1) * var(--bento-gap)) / var(--bento-cols)
+    );
+  }
+
+  @media (min-width: 768px) {
+    .bento-grid[data-columns="2"] {
+      --bento-cols: 2;
+    }
+
+    .bento-grid[data-columns="3"] {
+      --bento-cols: 3;
+    }
+
+    .bento-grid[data-columns="4"] {
+      --bento-cols: 4;
+    }
+  }
+
+  .bento-tile-body {
+    @apply flex h-full min-h-0 flex-col justify-between gap-3 overflow-hidden;
+  }
+
+  .bento-tile-stack {
+    @apply flex h-full min-h-0 flex-col gap-3 overflow-hidden;
+  }
+
+  .bento-col-stack {
+    @apply flex h-full min-h-0 flex-col gap-[var(--bento-gap)];
+  }
+
+  .bento-display-lg {
+    @apply font-display text-[28px] font-bold leading-tight tracking-tight;
+  }
+
+  .bento-display-sm {
+    @apply font-display text-[18px] font-bold leading-tight tracking-tight;
+  }
+
+  .bento-display-hero {
+    @apply text-[3.5rem] font-extrabold leading-none tracking-tighter;
+  }
+
+  .bento-text-body {
+    @apply text-[15px] leading-relaxed text-muted-foreground;
+  }
+
+  .bento-text-caption {
+    @apply text-[14px] text-muted-foreground;
+  }
+
+  .bento-text-caption-relaxed {
+    @apply text-[14px] leading-relaxed text-muted-foreground;
+  }
+
+  .bento-text-meta {
+    @apply text-[13px] font-medium text-muted-foreground;
+  }
+
+  .bento-text-label {
+    @apply font-display text-[15px] font-medium tracking-tight text-muted-foreground;
+  }
+
+  .bento-text-ticker {
+    @apply px-4 font-display text-[13px] font-medium uppercase tracking-[0.2em] text-foreground;
+  }
+
+  .bento-text-nav {
+    @apply font-display text-[18px] font-bold tracking-tight hover:underline;
+  }
+
+  .bento-text-nav-muted {
+    @apply font-display text-[18px] font-bold tracking-tight text-muted-foreground hover:text-foreground hover:underline;
+  }
+
+  .bento-icon-lg {
+    @apply size-14 shrink-0 object-contain;
+  }
+
+  .bento-icon-btn {
+    @apply flex size-9 shrink-0 items-center justify-center rounded-full bg-bento-accent text-foreground;
+  }
+
+  .bento-icon-btn-sm {
+    @apply flex size-8 items-center justify-center rounded-full bg-bento-accent;
+  }
+
+  .bento-cta-pill {
+    @apply inline-flex h-11 w-full shrink-0 items-center justify-center rounded-full bg-bento-accent px-8 font-display text-[15px] font-bold text-foreground transition-opacity hover:opacity-90;
+  }
+
+  .bento-link {
+    @apply inline-flex items-center gap-2 font-display text-[15px] font-medium hover:underline;
+  }
+
+  .bento-external-badge {
+    @apply absolute right-4 bottom-4 flex size-10 items-center justify-center rounded-full border-2 border-white bg-white text-foreground;
+  }
+
+  .bento-marquee {
+    @apply flex h-full w-full items-center overflow-hidden rounded-[var(--radius)] bg-bento-tile px-2;
+  }
+
+  .bento-social {
+    @apply relative flex h-full min-h-0 w-full items-center justify-center rounded-[var(--radius)];
+  }
+
+  .bento-service-card {
+    @apply flex h-full min-h-0 min-w-0 flex-col justify-between gap-2 rounded-[var(--radius)] bg-bento-tile-muted/50 p-4;
+  }
+
+  .bento-exp-item {
+    @apply flex flex-col gap-1 py-4 first:pt-0;
+  }
+
+  .bento-exp-header {
+    @apply flex flex-col gap-1;
+  }
+
+  .bento-contact {
+    @apply flex h-full w-full flex-col items-stretch justify-between gap-4 md:flex-row md:items-center md:justify-between;
+  }
+
+  .bento-carousel-nav {
+    @apply static top-auto right-auto left-auto size-8 shrink-0 translate-x-0 translate-y-0 border-0 bg-bento-tile shadow-none;
+  }
+
+  .bento-carousel-item {
+    @apply basis-full pl-0;
+  }
+}
+
+@layer utilities {
+  .bento-lift {
+    transform-origin: center center;
+    transition:
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .bento-lift:hover {
+    transform: scale(1.02) translateY(-0.25rem);
+    box-shadow: 0 12px 28px -6px rgb(10 16 20 / 0.12);
+  }
+
+  .dark .bento-lift:hover {
+    box-shadow: 0 12px 28px -6px rgb(0 0 0 / 0.45);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bento-lift {
+      @apply transition-none;
+    }
+
+    .bento-lift:hover {
+      transform: none;
+      box-shadow: none;
+    }
+  }
 }

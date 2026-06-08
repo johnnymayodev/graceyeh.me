@@ -1,39 +1,139 @@
-// import { H1 } from "@/components/typography/H1";
-// import { H2 } from "@/components/typography/H2";
-import { P } from "@/components/typography/P";
-import { Button } from "@/components/ui/button";
-import { ArrowUpRight } from "lucide-react";
+import {
+  AboutTile,
+  CaseStudyTile,
+  ContactTile,
+  ExperienceList,
+  MarqueeTicker,
+  SkillsCarousel,
+  SocialLink,
+  resolveSocialLinkColor,
+} from "@/components/bento";
+import {
+  BentoBox,
+  BentoGrid,
+  BentoPage,
+  BentoSection,
+} from "@/components/layout";
+import {
+  availabilityTicker,
+  experience,
+  profile,
+  projects,
+  services,
+  social,
+  tickerItems,
+} from "@/data/portfolio";
 
 export function Home() {
+  const featuredProject = projects[0];
+  const moreProjects = projects.slice(1);
+  const primarySocial = social[0];
+
   return (
-    <>
-      <section className="relative md:p-24 grid md:grid-cols-2 md:gap-24 lg:gap-48 items-center">
-        <div className="px-[8%] mx-auto">
-          {/* <H1 className="text-6xl">Grace Yeh</H1> */}
-          <P>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam
-            veniam culpa repellat itaque atque incidunt illum! Modi optio fugit
-            quia eaque, expedita temporibus inventore rerum quibusdam cum
-            laudantium voluptate atque?
-          </P>
-          <Button
-            className="
-              cursor-pointer
-              mt-6 w-full h-14
-              md:px-6! md:w-auto
-            "
+    <BentoPage>
+      <BentoGrid columns={4}>
+        <BentoSection id="about">
+          <BentoBox colSpan={1} rowSpan={1} variant="body">
+            <AboutTile variant="text" bio={profile.bio} />
+          </BentoBox>
+          <BentoBox colSpan={1} rowSpan={1} variant="image">
+            <AboutTile
+              variant="image"
+              image={profile.image}
+              name={profile.name}
+            />
+          </BentoBox>
+          <BentoBox colSpan={1} rowSpan={1} variant="colStack">
+            <BentoBox nested variant="marquee" className="min-h-0 flex-1">
+              <MarqueeTicker items={tickerItems} speed={28} />
+            </BentoBox>
+            <BentoBox nested variant="marquee" className="min-h-0 flex-1">
+              <MarqueeTicker items={availabilityTicker} speed={22} />
+            </BentoBox>
+          </BentoBox>
+          <BentoBox
+            colSpan={1}
+            rowSpan={1}
+            variant="social"
+            href={primarySocial.href}
+            external
+            style={{
+              backgroundColor: resolveSocialLinkColor(
+                primarySocial.platform,
+                primarySocial.color,
+              ),
+            }}
+            aria-label={`Visit ${primarySocial.platform} profile`}
           >
-            Lets Connect <ArrowUpRight />
-          </Button>
-        </div>
-        <img
-          src="/graceyeh1.jpg"
-          className="
-            h-full top-0 w-full object-cover absolute -z-10 opacity-25
-            md:relative md:opacity-100 md:z-0 md:overflow-hidden md:rounded-2xl
-          "
-        />
-      </section>
-    </>
+            <SocialLink link={primarySocial} className="text-white" />
+          </BentoBox>
+        </BentoSection>
+
+        <BentoSection id="work">
+          <BentoBox
+            colSpan={2}
+            rowSpan={2}
+            variant="caseStudy"
+            href={featuredProject.href}
+            external={featuredProject.href.startsWith("http")}
+          >
+            <CaseStudyTile
+              title={featuredProject.title}
+              image={featuredProject.image}
+              tag={featuredProject.tag}
+            />
+          </BentoBox>
+        </BentoSection>
+
+        <BentoSection id="experience">
+          <BentoBox colSpan={2} rowSpan={2} variant="body">
+            <ExperienceList
+              items={experience.slice(0, 4)}
+              resumeHref={profile.resumeHref}
+            />
+          </BentoBox>
+        </BentoSection>
+
+        <BentoSection id="services">
+          <BentoBox colSpan={4} rowSpan={1} variant="stack">
+            <SkillsCarousel items={services} />
+          </BentoBox>
+        </BentoSection>
+
+        {moreProjects.length > 0 && (
+          <>
+            {moreProjects.map((project, i) => {
+              const isLarge = i === 0;
+              return (
+                <BentoBox
+                  key={project.slug}
+                  colSpan={isLarge ? 2 : 1}
+                  rowSpan={isLarge ? 2 : 1}
+                  variant="caseStudy"
+                  href={project.href}
+                  external={project.href.startsWith("http")}
+                >
+                  <CaseStudyTile
+                    title={project.title}
+                    image={project.image}
+                    tag={project.tag}
+                    compact={!isLarge}
+                  />
+                </BentoBox>
+              );
+            })}
+          </>
+        )}
+
+        <BentoSection id="contact">
+          <BentoBox colSpan={4} rowSpan={1} variant="contact">
+            <ContactTile
+              links={social}
+              cta={{ label: "Say Hello", href: `mailto:${profile.email}` }}
+            />
+          </BentoBox>
+        </BentoSection>
+      </BentoGrid>
+    </BentoPage>
   );
 }
