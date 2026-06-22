@@ -22,6 +22,7 @@ type BentoBoxProps = {
   colSpan?: number;
   rowSpan?: number;
   fullWidth?: boolean;
+  stretchable?: boolean;
 };
 
 export function BentoBox({
@@ -34,7 +35,8 @@ export function BentoBox({
   return (
     <div
       className={cn(
-        "flex flex-col justify-between p-6 rounded-4xl bg-card text-card-foreground",
+        "flex flex-col justify-between p-4 sm:p-6 rounded-4xl bg-card text-card-foreground",
+        "overflow-hidden",
         fullWidth ? "col-span-full" : (COL_SPAN_CLASS[colSpan] ?? "col-span-1"),
         ROW_SPAN_CLASS[rowSpan] ?? "row-span-1",
         className,
