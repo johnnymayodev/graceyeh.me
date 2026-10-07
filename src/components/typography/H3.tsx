@@ -1,20 +1,10 @@
-import { cn } from "@/lib/utils";
+import type { HTMLAttributes } from "react";
 
-export function H3({
-  children,
-  className,
-}: {
-  children?: React.ReactNode | string;
-  className?: string;
-}) {
+export function H3({ className = "", ...props }: HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h3
-      className={cn(
-        "scroll-m-20 text-2xl font-semibold tracking-tight",
-        className
-      )}
-    >
-      {children}
-    </h3>
+      className={`font-display font-bold text-2xl tracking-tight text-balance md:text-3xl ${className}`}
+      {...props}
+    />
   );
 }
